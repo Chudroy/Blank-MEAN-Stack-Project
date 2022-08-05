@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -5,13 +9,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 
-// var indexRouter = require("./routes/index");
-// var usersRouter = require("./routes/users");
-const portfolioDB =
-  "mongodb+srv://Chudroy:ggXMdTH6rPOOt5Ip@cluster0.axwwwpc.mongodb.net/?retryWrites=true&w=majority";
-const bilbaoBarriosDB =
-  "mongodb+srv://Chudroy:ggXMdTH6rPOOt5Ip@cluster0.wmqob.mongodb.net/BilbaoBarriosDB?retryWrites=true&w=majority";
-mongoose.connect(bilbaoBarriosDB).then(
+const { DB_URL } = process.env;
+
+mongoose.connect(DB_URL).then(
   () => {
     console.log("successfully connected");
   },
